@@ -1,0 +1,16 @@
+# Flutter
+/build/
+build/**
+/.dart_tool/
+/.packages
+/.pub-cache/
+/ios/Pods/
+/android/.gradle/
+/android/app/release/
+*.iml
+/.idea/
+pubspec.lock
+
+# Secrets
+.env
+.env.*

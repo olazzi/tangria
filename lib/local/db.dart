@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:drift/drift.dart';
+import 'package:drift/drift.dart' as drift;
 import 'package:drift/native.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -89,4 +90,11 @@ class AppDb extends _$AppDb {
   Future<void> deleteRequest(String id) async {
     await (delete(aiRequest)..where((t) => t.id.equals(id))).go();
   }
+
+  Future<void> updateRequestResponseJson(String id, String responseJson) async {
+  await (update(aiRequest)..where((t) => t.id.equals(id))).write(
+    AiRequestCompanion(responseJson: drift.Value(responseJson)),
+  );
+}
+
 }

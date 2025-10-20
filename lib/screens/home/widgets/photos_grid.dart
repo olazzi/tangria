@@ -41,6 +41,7 @@ class _PhotosGridState extends State<PhotosGrid> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final canDelete = widget.photos.length > 1 && !widget.sending;
 
     return LayoutBuilder(
       builder: (c, cons) {
@@ -86,15 +87,18 @@ class _PhotosGridState extends State<PhotosGrid> {
                       ),
                     const SizedBox(width: 8),
                     InkWell(
-                      onTap: widget.sending ? null : () => widget.onRemoveAt(_ix),
+                      onTap: canDelete ? () => widget.onRemoveAt(_ix) : null,
                       borderRadius: BorderRadius.circular(22),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.55),
-                          borderRadius: BorderRadius.circular(22),
+                      child: Opacity(
+                        opacity: canDelete ? 1.0 : 0.45,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.55),
+                            borderRadius: BorderRadius.circular(22),
+                          ),
+                          child: const Icon(Icons.delete_outline, size: 18, color: Colors.white),
                         ),
-                        child: const Icon(Icons.delete_outline, size: 18, color: Colors.white),
                       ),
                     ),
                   ],

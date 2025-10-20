@@ -1,4 +1,3 @@
-// lib/screens/home/widgets/history_tile.dart
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../services/history_service.dart';
@@ -6,7 +5,14 @@ import '../../../services/history_service.dart';
 class HistoryTile extends StatelessWidget {
   final HistoryCardData item;
   final VoidCallback onTap;
-  const HistoryTile({super.key, required this.item, required this.onTap});
+  final VoidCallback onDelete;
+
+  const HistoryTile({
+    super.key,
+    required this.item,
+    required this.onTap,
+    required this.onDelete,
+  });
 
   String _brandFrom(String t) {
     final s = t.trim();
@@ -46,6 +52,7 @@ class HistoryTile extends StatelessWidget {
             item.imagePath.isEmpty
                 ? Container(color: Theme.of(context).colorScheme.surfaceVariant)
                 : Image.file(File(item.imagePath), fit: BoxFit.cover),
+
             Positioned.fill(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -61,6 +68,25 @@ class HistoryTile extends StatelessWidget {
                 ),
               ),
             ),
+
+            // Sağ üst: sil butonu
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Material(
+                color: Colors.black54,
+                shape: const CircleBorder(),
+                child: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: onDelete,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Icon(Icons.delete_outline, size: 20, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+
             Positioned(
               left: 16,
               right: 16,
@@ -94,7 +120,7 @@ class HistoryTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.95),
-                              fontSize: 13,
+                              fontSize: 11,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.2,
                               height: 1.15,

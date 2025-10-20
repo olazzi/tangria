@@ -4,118 +4,123 @@ part of 'db.dart';
 
 // ignore_for_file: type=lint
 class $AiRequestTable extends AiRequest
-    with TableInfo<$AiRequestTable, AiRequestData> {
+    with drift.TableInfo<$AiRequestTable, AiRequestData> {
   @override
-  final GeneratedDatabase attachedDatabase;
+  final drift.GeneratedDatabase attachedDatabase;
   final String? _alias;
   $AiRequestTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const drift.VerificationMeta _idMeta = const drift.VerificationMeta(
+    'id',
+  );
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final drift.GeneratedColumn<String> id = drift.GeneratedColumn<String>(
     'id',
     aliasedName,
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+  static const drift.VerificationMeta _createdAtMeta =
+      const drift.VerificationMeta('createdAt');
   @override
-  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-    defaultValue: currentDateAndTime,
-  );
-  static const VerificationMeta _modelMeta = const VerificationMeta('model');
-  @override
-  late final GeneratedColumn<String> model = GeneratedColumn<String>(
+  late final drift.GeneratedColumn<DateTime> createdAt =
+      drift.GeneratedColumn<DateTime>(
+        'created_at',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+        defaultValue: drift.currentDateAndTime,
+      );
+  static const drift.VerificationMeta _modelMeta = const drift.VerificationMeta(
     'model',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _temperatureMeta = const VerificationMeta(
-    'temperature',
   );
   @override
-  late final GeneratedColumn<double> temperature = GeneratedColumn<double>(
-    'temperature',
-    aliasedName,
-    false,
-    type: DriftSqlType.double,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _statusCodeMeta = const VerificationMeta(
-    'statusCode',
-  );
+  late final drift.GeneratedColumn<String> model =
+      drift.GeneratedColumn<String>(
+        'model',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const drift.VerificationMeta _temperatureMeta =
+      const drift.VerificationMeta('temperature');
   @override
-  late final GeneratedColumn<int> statusCode = GeneratedColumn<int>(
+  late final drift.GeneratedColumn<double> temperature =
+      drift.GeneratedColumn<double>(
+        'temperature',
+        aliasedName,
+        false,
+        type: DriftSqlType.double,
+        requiredDuringInsert: true,
+      );
+  static const drift.VerificationMeta _statusCodeMeta =
+      const drift.VerificationMeta('statusCode');
+  @override
+  late final drift.GeneratedColumn<int> statusCode = drift.GeneratedColumn<int>(
     'status_code',
     aliasedName,
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _latencyMsMeta = const VerificationMeta(
-    'latencyMs',
-  );
+  static const drift.VerificationMeta _latencyMsMeta =
+      const drift.VerificationMeta('latencyMs');
   @override
-  late final GeneratedColumn<int> latencyMs = GeneratedColumn<int>(
+  late final drift.GeneratedColumn<int> latencyMs = drift.GeneratedColumn<int>(
     'latency_ms',
     aliasedName,
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _promptMeta = const VerificationMeta('prompt');
+  static const drift.VerificationMeta _promptMeta =
+      const drift.VerificationMeta('prompt');
   @override
-  late final GeneratedColumn<String> prompt = GeneratedColumn<String>(
-    'prompt',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _errorTextMeta = const VerificationMeta(
-    'errorText',
-  );
+  late final drift.GeneratedColumn<String> prompt =
+      drift.GeneratedColumn<String>(
+        'prompt',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const drift.VerificationMeta _errorTextMeta =
+      const drift.VerificationMeta('errorText');
   @override
-  late final GeneratedColumn<String> errorText = GeneratedColumn<String>(
-    'error_text',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _responseTextMeta = const VerificationMeta(
-    'responseText',
-  );
+  late final drift.GeneratedColumn<String> errorText =
+      drift.GeneratedColumn<String>(
+        'error_text',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const drift.VerificationMeta _responseTextMeta =
+      const drift.VerificationMeta('responseText');
   @override
-  late final GeneratedColumn<String> responseText = GeneratedColumn<String>(
-    'response_text',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _responseJsonMeta = const VerificationMeta(
-    'responseJson',
-  );
+  late final drift.GeneratedColumn<String> responseText =
+      drift.GeneratedColumn<String>(
+        'response_text',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const drift.VerificationMeta _responseJsonMeta =
+      const drift.VerificationMeta('responseJson');
   @override
-  late final GeneratedColumn<String> responseJson = GeneratedColumn<String>(
-    'response_json',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
+  late final drift.GeneratedColumn<String> responseJson =
+      drift.GeneratedColumn<String>(
+        'response_json',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
   @override
-  List<GeneratedColumn> get $columns => [
+  List<drift.GeneratedColumn> get $columns => [
     id,
     createdAt,
     model,
@@ -133,11 +138,11 @@ class $AiRequestTable extends AiRequest
   String get actualTableName => $name;
   static const String $name = 'ai_request';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<AiRequestData> instance, {
+  drift.VerificationContext validateIntegrity(
+    drift.Insertable<AiRequestData> instance, {
     bool isInserting = false,
   }) {
-    final context = VerificationContext();
+    final context = drift.VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
@@ -219,7 +224,7 @@ class $AiRequestTable extends AiRequest
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<drift.GeneratedColumn> get $primaryKey => {id};
   @override
   AiRequestData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -273,7 +278,8 @@ class $AiRequestTable extends AiRequest
   }
 }
 
-class AiRequestData extends DataClass implements Insertable<AiRequestData> {
+class AiRequestData extends drift.DataClass
+    implements drift.Insertable<AiRequestData> {
   final String id;
   final DateTime createdAt;
   final String model;
@@ -297,49 +303,49 @@ class AiRequestData extends DataClass implements Insertable<AiRequestData> {
     this.responseJson,
   });
   @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
-    map['created_at'] = Variable<DateTime>(createdAt);
-    map['model'] = Variable<String>(model);
-    map['temperature'] = Variable<double>(temperature);
-    map['status_code'] = Variable<int>(statusCode);
-    map['latency_ms'] = Variable<int>(latencyMs);
+  Map<String, drift.Expression> toColumns(bool nullToAbsent) {
+    final map = <String, drift.Expression>{};
+    map['id'] = drift.Variable<String>(id);
+    map['created_at'] = drift.Variable<DateTime>(createdAt);
+    map['model'] = drift.Variable<String>(model);
+    map['temperature'] = drift.Variable<double>(temperature);
+    map['status_code'] = drift.Variable<int>(statusCode);
+    map['latency_ms'] = drift.Variable<int>(latencyMs);
     if (!nullToAbsent || prompt != null) {
-      map['prompt'] = Variable<String>(prompt);
+      map['prompt'] = drift.Variable<String>(prompt);
     }
     if (!nullToAbsent || errorText != null) {
-      map['error_text'] = Variable<String>(errorText);
+      map['error_text'] = drift.Variable<String>(errorText);
     }
     if (!nullToAbsent || responseText != null) {
-      map['response_text'] = Variable<String>(responseText);
+      map['response_text'] = drift.Variable<String>(responseText);
     }
     if (!nullToAbsent || responseJson != null) {
-      map['response_json'] = Variable<String>(responseJson);
+      map['response_json'] = drift.Variable<String>(responseJson);
     }
     return map;
   }
 
   AiRequestCompanion toCompanion(bool nullToAbsent) {
     return AiRequestCompanion(
-      id: Value(id),
-      createdAt: Value(createdAt),
-      model: Value(model),
-      temperature: Value(temperature),
-      statusCode: Value(statusCode),
-      latencyMs: Value(latencyMs),
+      id: drift.Value(id),
+      createdAt: drift.Value(createdAt),
+      model: drift.Value(model),
+      temperature: drift.Value(temperature),
+      statusCode: drift.Value(statusCode),
+      latencyMs: drift.Value(latencyMs),
       prompt: prompt == null && nullToAbsent
-          ? const Value.absent()
-          : Value(prompt),
+          ? const drift.Value.absent()
+          : drift.Value(prompt),
       errorText: errorText == null && nullToAbsent
-          ? const Value.absent()
-          : Value(errorText),
+          ? const drift.Value.absent()
+          : drift.Value(errorText),
       responseText: responseText == null && nullToAbsent
-          ? const Value.absent()
-          : Value(responseText),
+          ? const drift.Value.absent()
+          : drift.Value(responseText),
       responseJson: responseJson == null && nullToAbsent
-          ? const Value.absent()
-          : Value(responseJson),
+          ? const drift.Value.absent()
+          : drift.Value(responseJson),
     );
   }
 
@@ -347,7 +353,7 @@ class AiRequestData extends DataClass implements Insertable<AiRequestData> {
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
+    serializer ??= drift.driftRuntimeOptions.defaultSerializer;
     return AiRequestData(
       id: serializer.fromJson<String>(json['id']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
@@ -363,7 +369,7 @@ class AiRequestData extends DataClass implements Insertable<AiRequestData> {
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
+    serializer ??= drift.driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'createdAt': serializer.toJson<DateTime>(createdAt),
@@ -385,10 +391,10 @@ class AiRequestData extends DataClass implements Insertable<AiRequestData> {
     double? temperature,
     int? statusCode,
     int? latencyMs,
-    Value<String?> prompt = const Value.absent(),
-    Value<String?> errorText = const Value.absent(),
-    Value<String?> responseText = const Value.absent(),
-    Value<String?> responseJson = const Value.absent(),
+    drift.Value<String?> prompt = const drift.Value.absent(),
+    drift.Value<String?> errorText = const drift.Value.absent(),
+    drift.Value<String?> responseText = const drift.Value.absent(),
+    drift.Value<String?> responseJson = const drift.Value.absent(),
   }) => AiRequestData(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -470,62 +476,62 @@ class AiRequestData extends DataClass implements Insertable<AiRequestData> {
           other.responseJson == this.responseJson);
 }
 
-class AiRequestCompanion extends UpdateCompanion<AiRequestData> {
-  final Value<String> id;
-  final Value<DateTime> createdAt;
-  final Value<String> model;
-  final Value<double> temperature;
-  final Value<int> statusCode;
-  final Value<int> latencyMs;
-  final Value<String?> prompt;
-  final Value<String?> errorText;
-  final Value<String?> responseText;
-  final Value<String?> responseJson;
-  final Value<int> rowid;
+class AiRequestCompanion extends drift.UpdateCompanion<AiRequestData> {
+  final drift.Value<String> id;
+  final drift.Value<DateTime> createdAt;
+  final drift.Value<String> model;
+  final drift.Value<double> temperature;
+  final drift.Value<int> statusCode;
+  final drift.Value<int> latencyMs;
+  final drift.Value<String?> prompt;
+  final drift.Value<String?> errorText;
+  final drift.Value<String?> responseText;
+  final drift.Value<String?> responseJson;
+  final drift.Value<int> rowid;
   const AiRequestCompanion({
-    this.id = const Value.absent(),
-    this.createdAt = const Value.absent(),
-    this.model = const Value.absent(),
-    this.temperature = const Value.absent(),
-    this.statusCode = const Value.absent(),
-    this.latencyMs = const Value.absent(),
-    this.prompt = const Value.absent(),
-    this.errorText = const Value.absent(),
-    this.responseText = const Value.absent(),
-    this.responseJson = const Value.absent(),
-    this.rowid = const Value.absent(),
+    this.id = const drift.Value.absent(),
+    this.createdAt = const drift.Value.absent(),
+    this.model = const drift.Value.absent(),
+    this.temperature = const drift.Value.absent(),
+    this.statusCode = const drift.Value.absent(),
+    this.latencyMs = const drift.Value.absent(),
+    this.prompt = const drift.Value.absent(),
+    this.errorText = const drift.Value.absent(),
+    this.responseText = const drift.Value.absent(),
+    this.responseJson = const drift.Value.absent(),
+    this.rowid = const drift.Value.absent(),
   });
   AiRequestCompanion.insert({
     required String id,
-    this.createdAt = const Value.absent(),
+    this.createdAt = const drift.Value.absent(),
     required String model,
     required double temperature,
     required int statusCode,
     required int latencyMs,
-    this.prompt = const Value.absent(),
-    this.errorText = const Value.absent(),
-    this.responseText = const Value.absent(),
-    this.responseJson = const Value.absent(),
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       model = Value(model),
-       temperature = Value(temperature),
-       statusCode = Value(statusCode),
-       latencyMs = Value(latencyMs);
-  static Insertable<AiRequestData> custom({
-    Expression<String>? id,
-    Expression<DateTime>? createdAt,
-    Expression<String>? model,
-    Expression<double>? temperature,
-    Expression<int>? statusCode,
-    Expression<int>? latencyMs,
-    Expression<String>? prompt,
-    Expression<String>? errorText,
-    Expression<String>? responseText,
-    Expression<String>? responseJson,
-    Expression<int>? rowid,
+    this.prompt = const drift.Value.absent(),
+    this.errorText = const drift.Value.absent(),
+    this.responseText = const drift.Value.absent(),
+    this.responseJson = const drift.Value.absent(),
+    this.rowid = const drift.Value.absent(),
+  }) : id = drift.Value(id),
+       model = drift.Value(model),
+       temperature = drift.Value(temperature),
+       statusCode = drift.Value(statusCode),
+       latencyMs = drift.Value(latencyMs);
+  static drift.Insertable<AiRequestData> custom({
+    drift.Expression<String>? id,
+    drift.Expression<DateTime>? createdAt,
+    drift.Expression<String>? model,
+    drift.Expression<double>? temperature,
+    drift.Expression<int>? statusCode,
+    drift.Expression<int>? latencyMs,
+    drift.Expression<String>? prompt,
+    drift.Expression<String>? errorText,
+    drift.Expression<String>? responseText,
+    drift.Expression<String>? responseJson,
+    drift.Expression<int>? rowid,
   }) {
-    return RawValuesInsertable({
+    return drift.RawValuesInsertable({
       if (id != null) 'id': id,
       if (createdAt != null) 'created_at': createdAt,
       if (model != null) 'model': model,
@@ -541,17 +547,17 @@ class AiRequestCompanion extends UpdateCompanion<AiRequestData> {
   }
 
   AiRequestCompanion copyWith({
-    Value<String>? id,
-    Value<DateTime>? createdAt,
-    Value<String>? model,
-    Value<double>? temperature,
-    Value<int>? statusCode,
-    Value<int>? latencyMs,
-    Value<String?>? prompt,
-    Value<String?>? errorText,
-    Value<String?>? responseText,
-    Value<String?>? responseJson,
-    Value<int>? rowid,
+    drift.Value<String>? id,
+    drift.Value<DateTime>? createdAt,
+    drift.Value<String>? model,
+    drift.Value<double>? temperature,
+    drift.Value<int>? statusCode,
+    drift.Value<int>? latencyMs,
+    drift.Value<String?>? prompt,
+    drift.Value<String?>? errorText,
+    drift.Value<String?>? responseText,
+    drift.Value<String?>? responseJson,
+    drift.Value<int>? rowid,
   }) {
     return AiRequestCompanion(
       id: id ?? this.id,
@@ -569,40 +575,40 @@ class AiRequestCompanion extends UpdateCompanion<AiRequestData> {
   }
 
   @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
+  Map<String, drift.Expression> toColumns(bool nullToAbsent) {
+    final map = <String, drift.Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = drift.Variable<String>(id.value);
     }
     if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+      map['created_at'] = drift.Variable<DateTime>(createdAt.value);
     }
     if (model.present) {
-      map['model'] = Variable<String>(model.value);
+      map['model'] = drift.Variable<String>(model.value);
     }
     if (temperature.present) {
-      map['temperature'] = Variable<double>(temperature.value);
+      map['temperature'] = drift.Variable<double>(temperature.value);
     }
     if (statusCode.present) {
-      map['status_code'] = Variable<int>(statusCode.value);
+      map['status_code'] = drift.Variable<int>(statusCode.value);
     }
     if (latencyMs.present) {
-      map['latency_ms'] = Variable<int>(latencyMs.value);
+      map['latency_ms'] = drift.Variable<int>(latencyMs.value);
     }
     if (prompt.present) {
-      map['prompt'] = Variable<String>(prompt.value);
+      map['prompt'] = drift.Variable<String>(prompt.value);
     }
     if (errorText.present) {
-      map['error_text'] = Variable<String>(errorText.value);
+      map['error_text'] = drift.Variable<String>(errorText.value);
     }
     if (responseText.present) {
-      map['response_text'] = Variable<String>(responseText.value);
+      map['response_text'] = drift.Variable<String>(responseText.value);
     }
     if (responseJson.present) {
-      map['response_json'] = Variable<String>(responseJson.value);
+      map['response_json'] = drift.Variable<String>(responseJson.value);
     }
     if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
+      map['rowid'] = drift.Variable<int>(rowid.value);
     }
     return map;
   }
@@ -627,57 +633,63 @@ class AiRequestCompanion extends UpdateCompanion<AiRequestData> {
 }
 
 class $AiRequestImageTable extends AiRequestImage
-    with TableInfo<$AiRequestImageTable, AiRequestImageData> {
+    with drift.TableInfo<$AiRequestImageTable, AiRequestImageData> {
   @override
-  final GeneratedDatabase attachedDatabase;
+  final drift.GeneratedDatabase attachedDatabase;
   final String? _alias;
   $AiRequestImageTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const drift.VerificationMeta _idMeta = const drift.VerificationMeta(
+    'id',
+  );
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final drift.GeneratedColumn<String> id = drift.GeneratedColumn<String>(
     'id',
     aliasedName,
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _requestIdMeta = const VerificationMeta(
-    'requestId',
+  static const drift.VerificationMeta _requestIdMeta =
+      const drift.VerificationMeta('requestId');
+  @override
+  late final drift.GeneratedColumn<String> requestId =
+      drift.GeneratedColumn<String>(
+        'request_id',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+        defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES ai_request (id) ON DELETE CASCADE',
+        ),
+      );
+  static const drift.VerificationMeta _idxMeta = const drift.VerificationMeta(
+    'idx',
   );
   @override
-  late final GeneratedColumn<String> requestId = GeneratedColumn<String>(
-    'request_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES ai_request (id) ON DELETE CASCADE',
-    ),
-  );
-  static const VerificationMeta _idxMeta = const VerificationMeta('idx');
-  @override
-  late final GeneratedColumn<int> idx = GeneratedColumn<int>(
+  late final drift.GeneratedColumn<int> idx = drift.GeneratedColumn<int>(
     'idx',
     aliasedName,
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _mimeTypeMeta = const VerificationMeta(
-    'mimeType',
+  static const drift.VerificationMeta _mimeTypeMeta =
+      const drift.VerificationMeta('mimeType');
+  @override
+  late final drift.GeneratedColumn<String> mimeType =
+      drift.GeneratedColumn<String>(
+        'mime_type',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const drift.VerificationMeta _pathMeta = const drift.VerificationMeta(
+    'path',
   );
   @override
-  late final GeneratedColumn<String> mimeType = GeneratedColumn<String>(
-    'mime_type',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _pathMeta = const VerificationMeta('path');
-  @override
-  late final GeneratedColumn<String> path = GeneratedColumn<String>(
+  late final drift.GeneratedColumn<String> path = drift.GeneratedColumn<String>(
     'path',
     aliasedName,
     true,
@@ -685,18 +697,24 @@ class $AiRequestImageTable extends AiRequestImage
     requiredDuringInsert: false,
   );
   @override
-  List<GeneratedColumn> get $columns => [id, requestId, idx, mimeType, path];
+  List<drift.GeneratedColumn> get $columns => [
+    id,
+    requestId,
+    idx,
+    mimeType,
+    path,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'ai_request_image';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<AiRequestImageData> instance, {
+  drift.VerificationContext validateIntegrity(
+    drift.Insertable<AiRequestImageData> instance, {
     bool isInserting = false,
   }) {
-    final context = VerificationContext();
+    final context = drift.VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
@@ -735,7 +753,7 @@ class $AiRequestImageTable extends AiRequestImage
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<drift.GeneratedColumn> get $primaryKey => {id};
   @override
   AiRequestImageData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -769,8 +787,8 @@ class $AiRequestImageTable extends AiRequestImage
   }
 }
 
-class AiRequestImageData extends DataClass
-    implements Insertable<AiRequestImageData> {
+class AiRequestImageData extends drift.DataClass
+    implements drift.Insertable<AiRequestImageData> {
   final String id;
   final String requestId;
   final int idx;
@@ -784,29 +802,31 @@ class AiRequestImageData extends DataClass
     this.path,
   });
   @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
-    map['request_id'] = Variable<String>(requestId);
-    map['idx'] = Variable<int>(idx);
+  Map<String, drift.Expression> toColumns(bool nullToAbsent) {
+    final map = <String, drift.Expression>{};
+    map['id'] = drift.Variable<String>(id);
+    map['request_id'] = drift.Variable<String>(requestId);
+    map['idx'] = drift.Variable<int>(idx);
     if (!nullToAbsent || mimeType != null) {
-      map['mime_type'] = Variable<String>(mimeType);
+      map['mime_type'] = drift.Variable<String>(mimeType);
     }
     if (!nullToAbsent || path != null) {
-      map['path'] = Variable<String>(path);
+      map['path'] = drift.Variable<String>(path);
     }
     return map;
   }
 
   AiRequestImageCompanion toCompanion(bool nullToAbsent) {
     return AiRequestImageCompanion(
-      id: Value(id),
-      requestId: Value(requestId),
-      idx: Value(idx),
+      id: drift.Value(id),
+      requestId: drift.Value(requestId),
+      idx: drift.Value(idx),
       mimeType: mimeType == null && nullToAbsent
-          ? const Value.absent()
-          : Value(mimeType),
-      path: path == null && nullToAbsent ? const Value.absent() : Value(path),
+          ? const drift.Value.absent()
+          : drift.Value(mimeType),
+      path: path == null && nullToAbsent
+          ? const drift.Value.absent()
+          : drift.Value(path),
     );
   }
 
@@ -814,7 +834,7 @@ class AiRequestImageData extends DataClass
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
+    serializer ??= drift.driftRuntimeOptions.defaultSerializer;
     return AiRequestImageData(
       id: serializer.fromJson<String>(json['id']),
       requestId: serializer.fromJson<String>(json['requestId']),
@@ -825,7 +845,7 @@ class AiRequestImageData extends DataClass
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
+    serializer ??= drift.driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'requestId': serializer.toJson<String>(requestId),
@@ -839,8 +859,8 @@ class AiRequestImageData extends DataClass
     String? id,
     String? requestId,
     int? idx,
-    Value<String?> mimeType = const Value.absent(),
-    Value<String?> path = const Value.absent(),
+    drift.Value<String?> mimeType = const drift.Value.absent(),
+    drift.Value<String?> path = const drift.Value.absent(),
   }) => AiRequestImageData(
     id: id ?? this.id,
     requestId: requestId ?? this.requestId,
@@ -883,40 +903,41 @@ class AiRequestImageData extends DataClass
           other.path == this.path);
 }
 
-class AiRequestImageCompanion extends UpdateCompanion<AiRequestImageData> {
-  final Value<String> id;
-  final Value<String> requestId;
-  final Value<int> idx;
-  final Value<String?> mimeType;
-  final Value<String?> path;
-  final Value<int> rowid;
+class AiRequestImageCompanion
+    extends drift.UpdateCompanion<AiRequestImageData> {
+  final drift.Value<String> id;
+  final drift.Value<String> requestId;
+  final drift.Value<int> idx;
+  final drift.Value<String?> mimeType;
+  final drift.Value<String?> path;
+  final drift.Value<int> rowid;
   const AiRequestImageCompanion({
-    this.id = const Value.absent(),
-    this.requestId = const Value.absent(),
-    this.idx = const Value.absent(),
-    this.mimeType = const Value.absent(),
-    this.path = const Value.absent(),
-    this.rowid = const Value.absent(),
+    this.id = const drift.Value.absent(),
+    this.requestId = const drift.Value.absent(),
+    this.idx = const drift.Value.absent(),
+    this.mimeType = const drift.Value.absent(),
+    this.path = const drift.Value.absent(),
+    this.rowid = const drift.Value.absent(),
   });
   AiRequestImageCompanion.insert({
     required String id,
     required String requestId,
     required int idx,
-    this.mimeType = const Value.absent(),
-    this.path = const Value.absent(),
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       requestId = Value(requestId),
-       idx = Value(idx);
-  static Insertable<AiRequestImageData> custom({
-    Expression<String>? id,
-    Expression<String>? requestId,
-    Expression<int>? idx,
-    Expression<String>? mimeType,
-    Expression<String>? path,
-    Expression<int>? rowid,
+    this.mimeType = const drift.Value.absent(),
+    this.path = const drift.Value.absent(),
+    this.rowid = const drift.Value.absent(),
+  }) : id = drift.Value(id),
+       requestId = drift.Value(requestId),
+       idx = drift.Value(idx);
+  static drift.Insertable<AiRequestImageData> custom({
+    drift.Expression<String>? id,
+    drift.Expression<String>? requestId,
+    drift.Expression<int>? idx,
+    drift.Expression<String>? mimeType,
+    drift.Expression<String>? path,
+    drift.Expression<int>? rowid,
   }) {
-    return RawValuesInsertable({
+    return drift.RawValuesInsertable({
       if (id != null) 'id': id,
       if (requestId != null) 'request_id': requestId,
       if (idx != null) 'idx': idx,
@@ -927,12 +948,12 @@ class AiRequestImageCompanion extends UpdateCompanion<AiRequestImageData> {
   }
 
   AiRequestImageCompanion copyWith({
-    Value<String>? id,
-    Value<String>? requestId,
-    Value<int>? idx,
-    Value<String?>? mimeType,
-    Value<String?>? path,
-    Value<int>? rowid,
+    drift.Value<String>? id,
+    drift.Value<String>? requestId,
+    drift.Value<int>? idx,
+    drift.Value<String?>? mimeType,
+    drift.Value<String?>? path,
+    drift.Value<int>? rowid,
   }) {
     return AiRequestImageCompanion(
       id: id ?? this.id,
@@ -945,25 +966,25 @@ class AiRequestImageCompanion extends UpdateCompanion<AiRequestImageData> {
   }
 
   @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
+  Map<String, drift.Expression> toColumns(bool nullToAbsent) {
+    final map = <String, drift.Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = drift.Variable<String>(id.value);
     }
     if (requestId.present) {
-      map['request_id'] = Variable<String>(requestId.value);
+      map['request_id'] = drift.Variable<String>(requestId.value);
     }
     if (idx.present) {
-      map['idx'] = Variable<int>(idx.value);
+      map['idx'] = drift.Variable<int>(idx.value);
     }
     if (mimeType.present) {
-      map['mime_type'] = Variable<String>(mimeType.value);
+      map['mime_type'] = drift.Variable<String>(mimeType.value);
     }
     if (path.present) {
-      map['path'] = Variable<String>(path.value);
+      map['path'] = drift.Variable<String>(path.value);
     }
     if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
+      map['rowid'] = drift.Variable<int>(rowid.value);
     }
     return map;
   }
@@ -982,68 +1003,444 @@ class AiRequestImageCompanion extends UpdateCompanion<AiRequestImageData> {
   }
 }
 
-abstract class _$AppDb extends GeneratedDatabase {
+class $RecommendationTable extends Recommendation
+    with drift.TableInfo<$RecommendationTable, RecommendationData> {
+  @override
+  final drift.GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RecommendationTable(this.attachedDatabase, [this._alias]);
+  static const drift.VerificationMeta _idMeta = const drift.VerificationMeta(
+    'id',
+  );
+  @override
+  late final drift.GeneratedColumn<String> id = drift.GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const drift.VerificationMeta _createdAtMeta =
+      const drift.VerificationMeta('createdAt');
+  @override
+  late final drift.GeneratedColumn<DateTime> createdAt =
+      drift.GeneratedColumn<DateTime>(
+        'created_at',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+        defaultValue: drift.currentDateAndTime,
+      );
+  static const drift.VerificationMeta _rankMeta = const drift.VerificationMeta(
+    'rank',
+  );
+  @override
+  late final drift.GeneratedColumn<int> rank = drift.GeneratedColumn<int>(
+    'rank',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const drift.VerificationMeta _titleMeta = const drift.VerificationMeta(
+    'title',
+  );
+  @override
+  late final drift.GeneratedColumn<String> title =
+      drift.GeneratedColumn<String>(
+        'title',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const drift.VerificationMeta _reasonMeta =
+      const drift.VerificationMeta('reason');
+  @override
+  late final drift.GeneratedColumn<String> reason =
+      drift.GeneratedColumn<String>(
+        'reason',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  @override
+  List<drift.GeneratedColumn> get $columns => [
+    id,
+    createdAt,
+    rank,
+    title,
+    reason,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'recommendation';
+  @override
+  drift.VerificationContext validateIntegrity(
+    drift.Insertable<RecommendationData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = drift.VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    if (data.containsKey('rank')) {
+      context.handle(
+        _rankMeta,
+        rank.isAcceptableOrUnknown(data['rank']!, _rankMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_rankMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('reason')) {
+      context.handle(
+        _reasonMeta,
+        reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_reasonMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<drift.GeneratedColumn> get $primaryKey => {id};
+  @override
+  RecommendationData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RecommendationData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      rank: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rank'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      reason: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}reason'],
+      )!,
+    );
+  }
+
+  @override
+  $RecommendationTable createAlias(String alias) {
+    return $RecommendationTable(attachedDatabase, alias);
+  }
+}
+
+class RecommendationData extends drift.DataClass
+    implements drift.Insertable<RecommendationData> {
+  final String id;
+  final DateTime createdAt;
+  final int rank;
+  final String title;
+  final String reason;
+  const RecommendationData({
+    required this.id,
+    required this.createdAt,
+    required this.rank,
+    required this.title,
+    required this.reason,
+  });
+  @override
+  Map<String, drift.Expression> toColumns(bool nullToAbsent) {
+    final map = <String, drift.Expression>{};
+    map['id'] = drift.Variable<String>(id);
+    map['created_at'] = drift.Variable<DateTime>(createdAt);
+    map['rank'] = drift.Variable<int>(rank);
+    map['title'] = drift.Variable<String>(title);
+    map['reason'] = drift.Variable<String>(reason);
+    return map;
+  }
+
+  RecommendationCompanion toCompanion(bool nullToAbsent) {
+    return RecommendationCompanion(
+      id: drift.Value(id),
+      createdAt: drift.Value(createdAt),
+      rank: drift.Value(rank),
+      title: drift.Value(title),
+      reason: drift.Value(reason),
+    );
+  }
+
+  factory RecommendationData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= drift.driftRuntimeOptions.defaultSerializer;
+    return RecommendationData(
+      id: serializer.fromJson<String>(json['id']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      rank: serializer.fromJson<int>(json['rank']),
+      title: serializer.fromJson<String>(json['title']),
+      reason: serializer.fromJson<String>(json['reason']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= drift.driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'rank': serializer.toJson<int>(rank),
+      'title': serializer.toJson<String>(title),
+      'reason': serializer.toJson<String>(reason),
+    };
+  }
+
+  RecommendationData copyWith({
+    String? id,
+    DateTime? createdAt,
+    int? rank,
+    String? title,
+    String? reason,
+  }) => RecommendationData(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    rank: rank ?? this.rank,
+    title: title ?? this.title,
+    reason: reason ?? this.reason,
+  );
+  RecommendationData copyWithCompanion(RecommendationCompanion data) {
+    return RecommendationData(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      rank: data.rank.present ? data.rank.value : this.rank,
+      title: data.title.present ? data.title.value : this.title,
+      reason: data.reason.present ? data.reason.value : this.reason,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecommendationData(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rank: $rank, ')
+          ..write('title: $title, ')
+          ..write('reason: $reason')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, createdAt, rank, title, reason);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RecommendationData &&
+          other.id == this.id &&
+          other.createdAt == this.createdAt &&
+          other.rank == this.rank &&
+          other.title == this.title &&
+          other.reason == this.reason);
+}
+
+class RecommendationCompanion
+    extends drift.UpdateCompanion<RecommendationData> {
+  final drift.Value<String> id;
+  final drift.Value<DateTime> createdAt;
+  final drift.Value<int> rank;
+  final drift.Value<String> title;
+  final drift.Value<String> reason;
+  final drift.Value<int> rowid;
+  const RecommendationCompanion({
+    this.id = const drift.Value.absent(),
+    this.createdAt = const drift.Value.absent(),
+    this.rank = const drift.Value.absent(),
+    this.title = const drift.Value.absent(),
+    this.reason = const drift.Value.absent(),
+    this.rowid = const drift.Value.absent(),
+  });
+  RecommendationCompanion.insert({
+    required String id,
+    this.createdAt = const drift.Value.absent(),
+    required int rank,
+    required String title,
+    required String reason,
+    this.rowid = const drift.Value.absent(),
+  }) : id = drift.Value(id),
+       rank = drift.Value(rank),
+       title = drift.Value(title),
+       reason = drift.Value(reason);
+  static drift.Insertable<RecommendationData> custom({
+    drift.Expression<String>? id,
+    drift.Expression<DateTime>? createdAt,
+    drift.Expression<int>? rank,
+    drift.Expression<String>? title,
+    drift.Expression<String>? reason,
+    drift.Expression<int>? rowid,
+  }) {
+    return drift.RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rank != null) 'rank': rank,
+      if (title != null) 'title': title,
+      if (reason != null) 'reason': reason,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RecommendationCompanion copyWith({
+    drift.Value<String>? id,
+    drift.Value<DateTime>? createdAt,
+    drift.Value<int>? rank,
+    drift.Value<String>? title,
+    drift.Value<String>? reason,
+    drift.Value<int>? rowid,
+  }) {
+    return RecommendationCompanion(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      rank: rank ?? this.rank,
+      title: title ?? this.title,
+      reason: reason ?? this.reason,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, drift.Expression> toColumns(bool nullToAbsent) {
+    final map = <String, drift.Expression>{};
+    if (id.present) {
+      map['id'] = drift.Variable<String>(id.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = drift.Variable<DateTime>(createdAt.value);
+    }
+    if (rank.present) {
+      map['rank'] = drift.Variable<int>(rank.value);
+    }
+    if (title.present) {
+      map['title'] = drift.Variable<String>(title.value);
+    }
+    if (reason.present) {
+      map['reason'] = drift.Variable<String>(reason.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = drift.Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecommendationCompanion(')
+          ..write('id: $id, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rank: $rank, ')
+          ..write('title: $title, ')
+          ..write('reason: $reason, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+abstract class _$AppDb extends drift.GeneratedDatabase {
   _$AppDb(QueryExecutor e) : super(e);
   $AppDbManager get managers => $AppDbManager(this);
   late final $AiRequestTable aiRequest = $AiRequestTable(this);
   late final $AiRequestImageTable aiRequestImage = $AiRequestImageTable(this);
+  late final $RecommendationTable recommendation = $RecommendationTable(this);
   @override
-  Iterable<TableInfo<Table, Object?>> get allTables =>
-      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+  Iterable<drift.TableInfo<drift.Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<drift.TableInfo<drift.Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [
+  List<drift.DatabaseSchemaEntity> get allSchemaEntities => [
     aiRequest,
     aiRequestImage,
+    recommendation,
   ];
   @override
-  StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'ai_request',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('ai_request_image', kind: UpdateKind.delete)],
-    ),
-  ]);
+  drift.StreamQueryUpdateRules get streamUpdateRules =>
+      const StreamQueryUpdateRules([
+        drift.WritePropagation(
+          on: drift.TableUpdateQuery.onTableName(
+            'ai_request',
+            limitUpdateKind: drift.UpdateKind.delete,
+          ),
+          result: [
+            drift.TableUpdate(
+              'ai_request_image',
+              kind: drift.UpdateKind.delete,
+            ),
+          ],
+        ),
+      ]);
 }
 
 typedef $$AiRequestTableCreateCompanionBuilder =
     AiRequestCompanion Function({
       required String id,
-      Value<DateTime> createdAt,
+      drift.Value<DateTime> createdAt,
       required String model,
       required double temperature,
       required int statusCode,
       required int latencyMs,
-      Value<String?> prompt,
-      Value<String?> errorText,
-      Value<String?> responseText,
-      Value<String?> responseJson,
-      Value<int> rowid,
+      drift.Value<String?> prompt,
+      drift.Value<String?> errorText,
+      drift.Value<String?> responseText,
+      drift.Value<String?> responseJson,
+      drift.Value<int> rowid,
     });
 typedef $$AiRequestTableUpdateCompanionBuilder =
     AiRequestCompanion Function({
-      Value<String> id,
-      Value<DateTime> createdAt,
-      Value<String> model,
-      Value<double> temperature,
-      Value<int> statusCode,
-      Value<int> latencyMs,
-      Value<String?> prompt,
-      Value<String?> errorText,
-      Value<String?> responseText,
-      Value<String?> responseJson,
-      Value<int> rowid,
+      drift.Value<String> id,
+      drift.Value<DateTime> createdAt,
+      drift.Value<String> model,
+      drift.Value<double> temperature,
+      drift.Value<int> statusCode,
+      drift.Value<int> latencyMs,
+      drift.Value<String?> prompt,
+      drift.Value<String?> errorText,
+      drift.Value<String?> responseText,
+      drift.Value<String?> responseJson,
+      drift.Value<int> rowid,
     });
 
 final class $$AiRequestTableReferences
-    extends BaseReferences<_$AppDb, $AiRequestTable, AiRequestData> {
+    extends drift.BaseReferences<_$AppDb, $AiRequestTable, AiRequestData> {
   $$AiRequestTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$AiRequestImageTable, List<AiRequestImageData>>
-  _aiRequestImageRefsTable(_$AppDb db) => MultiTypedResultKey.fromTable(
+  static drift.MultiTypedResultKey<
+    $AiRequestImageTable,
+    List<AiRequestImageData>
+  >
+  _aiRequestImageRefsTable(_$AppDb db) => drift.MultiTypedResultKey.fromTable(
     db.aiRequestImage,
-    aliasName: $_aliasNameGenerator(
+    aliasName: drift.$_aliasNameGenerator(
       db.aiRequest.id,
       db.aiRequestImage.requestId,
     ),
@@ -1056,14 +1453,14 @@ final class $$AiRequestTableReferences
     ).filter((f) => f.requestId.id.sqlEquals($_itemColumn<String>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_aiRequestImageRefsTable($_db));
-    return ProcessedTableManager(
+    return drift.ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
 }
 
 class $$AiRequestTableFilterComposer
-    extends Composer<_$AppDb, $AiRequestTable> {
+    extends drift.Composer<_$AppDb, $AiRequestTable> {
   $$AiRequestTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -1071,58 +1468,58 @@ class $$AiRequestTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id => $composableBuilder(
+  drift.ColumnFilters<String> get id => $composableBuilder(
     column: $table.id,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+  drift.ColumnFilters<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<String> get model => $composableBuilder(
+  drift.ColumnFilters<String> get model => $composableBuilder(
     column: $table.model,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<double> get temperature => $composableBuilder(
+  drift.ColumnFilters<double> get temperature => $composableBuilder(
     column: $table.temperature,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<int> get statusCode => $composableBuilder(
+  drift.ColumnFilters<int> get statusCode => $composableBuilder(
     column: $table.statusCode,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<int> get latencyMs => $composableBuilder(
+  drift.ColumnFilters<int> get latencyMs => $composableBuilder(
     column: $table.latencyMs,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<String> get prompt => $composableBuilder(
+  drift.ColumnFilters<String> get prompt => $composableBuilder(
     column: $table.prompt,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<String> get errorText => $composableBuilder(
+  drift.ColumnFilters<String> get errorText => $composableBuilder(
     column: $table.errorText,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<String> get responseText => $composableBuilder(
+  drift.ColumnFilters<String> get responseText => $composableBuilder(
     column: $table.responseText,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<String> get responseJson => $composableBuilder(
+  drift.ColumnFilters<String> get responseJson => $composableBuilder(
     column: $table.responseJson,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  Expression<bool> aiRequestImageRefs(
-    Expression<bool> Function($$AiRequestImageTableFilterComposer f) f,
+  drift.Expression<bool> aiRequestImageRefs(
+    drift.Expression<bool> Function($$AiRequestImageTableFilterComposer f) f,
   ) {
     final $$AiRequestImageTableFilterComposer composer = $composerBuilder(
       composer: this,
@@ -1148,7 +1545,7 @@ class $$AiRequestTableFilterComposer
 }
 
 class $$AiRequestTableOrderingComposer
-    extends Composer<_$AppDb, $AiRequestTable> {
+    extends drift.Composer<_$AppDb, $AiRequestTable> {
   $$AiRequestTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -1156,59 +1553,59 @@ class $$AiRequestTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id => $composableBuilder(
+  drift.ColumnOrderings<String> get id => $composableBuilder(
     column: $table.id,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+  drift.ColumnOrderings<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get model => $composableBuilder(
+  drift.ColumnOrderings<String> get model => $composableBuilder(
     column: $table.model,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<double> get temperature => $composableBuilder(
+  drift.ColumnOrderings<double> get temperature => $composableBuilder(
     column: $table.temperature,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<int> get statusCode => $composableBuilder(
+  drift.ColumnOrderings<int> get statusCode => $composableBuilder(
     column: $table.statusCode,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<int> get latencyMs => $composableBuilder(
+  drift.ColumnOrderings<int> get latencyMs => $composableBuilder(
     column: $table.latencyMs,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get prompt => $composableBuilder(
+  drift.ColumnOrderings<String> get prompt => $composableBuilder(
     column: $table.prompt,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get errorText => $composableBuilder(
+  drift.ColumnOrderings<String> get errorText => $composableBuilder(
     column: $table.errorText,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get responseText => $composableBuilder(
+  drift.ColumnOrderings<String> get responseText => $composableBuilder(
     column: $table.responseText,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get responseJson => $composableBuilder(
+  drift.ColumnOrderings<String> get responseJson => $composableBuilder(
     column: $table.responseJson,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 }
 
 class $$AiRequestTableAnnotationComposer
-    extends Composer<_$AppDb, $AiRequestTable> {
+    extends drift.Composer<_$AppDb, $AiRequestTable> {
   $$AiRequestTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -1216,46 +1613,46 @@ class $$AiRequestTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get id =>
+  drift.GeneratedColumn<String> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  GeneratedColumn<DateTime> get createdAt =>
+  drift.GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
 
-  GeneratedColumn<String> get model =>
+  drift.GeneratedColumn<String> get model =>
       $composableBuilder(column: $table.model, builder: (column) => column);
 
-  GeneratedColumn<double> get temperature => $composableBuilder(
+  drift.GeneratedColumn<double> get temperature => $composableBuilder(
     column: $table.temperature,
     builder: (column) => column,
   );
 
-  GeneratedColumn<int> get statusCode => $composableBuilder(
+  drift.GeneratedColumn<int> get statusCode => $composableBuilder(
     column: $table.statusCode,
     builder: (column) => column,
   );
 
-  GeneratedColumn<int> get latencyMs =>
+  drift.GeneratedColumn<int> get latencyMs =>
       $composableBuilder(column: $table.latencyMs, builder: (column) => column);
 
-  GeneratedColumn<String> get prompt =>
+  drift.GeneratedColumn<String> get prompt =>
       $composableBuilder(column: $table.prompt, builder: (column) => column);
 
-  GeneratedColumn<String> get errorText =>
+  drift.GeneratedColumn<String> get errorText =>
       $composableBuilder(column: $table.errorText, builder: (column) => column);
 
-  GeneratedColumn<String> get responseText => $composableBuilder(
+  drift.GeneratedColumn<String> get responseText => $composableBuilder(
     column: $table.responseText,
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get responseJson => $composableBuilder(
+  drift.GeneratedColumn<String> get responseJson => $composableBuilder(
     column: $table.responseJson,
     builder: (column) => column,
   );
 
-  Expression<T> aiRequestImageRefs<T extends Object>(
-    Expression<T> Function($$AiRequestImageTableAnnotationComposer a) f,
+  drift.Expression<T> aiRequestImageRefs<T extends Object>(
+    drift.Expression<T> Function($$AiRequestImageTableAnnotationComposer a) f,
   ) {
     final $$AiRequestImageTableAnnotationComposer composer = $composerBuilder(
       composer: this,
@@ -1282,7 +1679,7 @@ class $$AiRequestTableAnnotationComposer
 
 class $$AiRequestTableTableManager
     extends
-        RootTableManager<
+        drift.RootTableManager<
           _$AppDb,
           $AiRequestTable,
           AiRequestData,
@@ -1293,11 +1690,11 @@ class $$AiRequestTableTableManager
           $$AiRequestTableUpdateCompanionBuilder,
           (AiRequestData, $$AiRequestTableReferences),
           AiRequestData,
-          PrefetchHooks Function({bool aiRequestImageRefs})
+          drift.PrefetchHooks Function({bool aiRequestImageRefs})
         > {
   $$AiRequestTableTableManager(_$AppDb db, $AiRequestTable table)
     : super(
-        TableManagerState(
+        drift.TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -1308,17 +1705,17 @@ class $$AiRequestTableTableManager
               $$AiRequestTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> id = const Value.absent(),
-                Value<DateTime> createdAt = const Value.absent(),
-                Value<String> model = const Value.absent(),
-                Value<double> temperature = const Value.absent(),
-                Value<int> statusCode = const Value.absent(),
-                Value<int> latencyMs = const Value.absent(),
-                Value<String?> prompt = const Value.absent(),
-                Value<String?> errorText = const Value.absent(),
-                Value<String?> responseText = const Value.absent(),
-                Value<String?> responseJson = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
+                drift.Value<String> id = const drift.Value.absent(),
+                drift.Value<DateTime> createdAt = const drift.Value.absent(),
+                drift.Value<String> model = const drift.Value.absent(),
+                drift.Value<double> temperature = const drift.Value.absent(),
+                drift.Value<int> statusCode = const drift.Value.absent(),
+                drift.Value<int> latencyMs = const drift.Value.absent(),
+                drift.Value<String?> prompt = const drift.Value.absent(),
+                drift.Value<String?> errorText = const drift.Value.absent(),
+                drift.Value<String?> responseText = const drift.Value.absent(),
+                drift.Value<String?> responseJson = const drift.Value.absent(),
+                drift.Value<int> rowid = const drift.Value.absent(),
               }) => AiRequestCompanion(
                 id: id,
                 createdAt: createdAt,
@@ -1335,16 +1732,16 @@ class $$AiRequestTableTableManager
           createCompanionCallback:
               ({
                 required String id,
-                Value<DateTime> createdAt = const Value.absent(),
+                drift.Value<DateTime> createdAt = const drift.Value.absent(),
                 required String model,
                 required double temperature,
                 required int statusCode,
                 required int latencyMs,
-                Value<String?> prompt = const Value.absent(),
-                Value<String?> errorText = const Value.absent(),
-                Value<String?> responseText = const Value.absent(),
-                Value<String?> responseJson = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
+                drift.Value<String?> prompt = const drift.Value.absent(),
+                drift.Value<String?> errorText = const drift.Value.absent(),
+                drift.Value<String?> responseText = const drift.Value.absent(),
+                drift.Value<String?> responseJson = const drift.Value.absent(),
+                drift.Value<int> rowid = const drift.Value.absent(),
               }) => AiRequestCompanion.insert(
                 id: id,
                 createdAt: createdAt,
@@ -1367,7 +1764,7 @@ class $$AiRequestTableTableManager
               )
               .toList(),
           prefetchHooksCallback: ({aiRequestImageRefs = false}) {
-            return PrefetchHooks(
+            return drift.PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
                 if (aiRequestImageRefs) db.aiRequestImage,
@@ -1376,7 +1773,7 @@ class $$AiRequestTableTableManager
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (aiRequestImageRefs)
-                    await $_getPrefetchedData<
+                    await drift.$_getPrefetchedData<
                       AiRequestData,
                       $AiRequestTable,
                       AiRequestImageData
@@ -1403,7 +1800,7 @@ class $$AiRequestTableTableManager
 }
 
 typedef $$AiRequestTableProcessedTableManager =
-    ProcessedTableManager<
+    drift.ProcessedTableManager<
       _$AppDb,
       $AiRequestTable,
       AiRequestData,
@@ -1414,29 +1811,34 @@ typedef $$AiRequestTableProcessedTableManager =
       $$AiRequestTableUpdateCompanionBuilder,
       (AiRequestData, $$AiRequestTableReferences),
       AiRequestData,
-      PrefetchHooks Function({bool aiRequestImageRefs})
+      drift.PrefetchHooks Function({bool aiRequestImageRefs})
     >;
 typedef $$AiRequestImageTableCreateCompanionBuilder =
     AiRequestImageCompanion Function({
       required String id,
       required String requestId,
       required int idx,
-      Value<String?> mimeType,
-      Value<String?> path,
-      Value<int> rowid,
+      drift.Value<String?> mimeType,
+      drift.Value<String?> path,
+      drift.Value<int> rowid,
     });
 typedef $$AiRequestImageTableUpdateCompanionBuilder =
     AiRequestImageCompanion Function({
-      Value<String> id,
-      Value<String> requestId,
-      Value<int> idx,
-      Value<String?> mimeType,
-      Value<String?> path,
-      Value<int> rowid,
+      drift.Value<String> id,
+      drift.Value<String> requestId,
+      drift.Value<int> idx,
+      drift.Value<String?> mimeType,
+      drift.Value<String?> path,
+      drift.Value<int> rowid,
     });
 
 final class $$AiRequestImageTableReferences
-    extends BaseReferences<_$AppDb, $AiRequestImageTable, AiRequestImageData> {
+    extends
+        drift.BaseReferences<
+          _$AppDb,
+          $AiRequestImageTable,
+          AiRequestImageData
+        > {
   $$AiRequestImageTableReferences(
     super.$_db,
     super.$_table,
@@ -1445,7 +1847,10 @@ final class $$AiRequestImageTableReferences
 
   static $AiRequestTable _requestIdTable(_$AppDb db) =>
       db.aiRequest.createAlias(
-        $_aliasNameGenerator(db.aiRequestImage.requestId, db.aiRequest.id),
+        drift.$_aliasNameGenerator(
+          db.aiRequestImage.requestId,
+          db.aiRequest.id,
+        ),
       );
 
   $$AiRequestTableProcessedTableManager get requestId {
@@ -1457,14 +1862,14 @@ final class $$AiRequestImageTableReferences
     ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_requestIdTable($_db));
     if (item == null) return manager;
-    return ProcessedTableManager(
+    return drift.ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
 }
 
 class $$AiRequestImageTableFilterComposer
-    extends Composer<_$AppDb, $AiRequestImageTable> {
+    extends drift.Composer<_$AppDb, $AiRequestImageTable> {
   $$AiRequestImageTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -1472,24 +1877,24 @@ class $$AiRequestImageTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id => $composableBuilder(
+  drift.ColumnFilters<String> get id => $composableBuilder(
     column: $table.id,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<int> get idx => $composableBuilder(
+  drift.ColumnFilters<int> get idx => $composableBuilder(
     column: $table.idx,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<String> get mimeType => $composableBuilder(
+  drift.ColumnFilters<String> get mimeType => $composableBuilder(
     column: $table.mimeType,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
-  ColumnFilters<String> get path => $composableBuilder(
+  drift.ColumnFilters<String> get path => $composableBuilder(
     column: $table.path,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => drift.ColumnFilters(column),
   );
 
   $$AiRequestTableFilterComposer get requestId {
@@ -1517,7 +1922,7 @@ class $$AiRequestImageTableFilterComposer
 }
 
 class $$AiRequestImageTableOrderingComposer
-    extends Composer<_$AppDb, $AiRequestImageTable> {
+    extends drift.Composer<_$AppDb, $AiRequestImageTable> {
   $$AiRequestImageTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -1525,24 +1930,24 @@ class $$AiRequestImageTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id => $composableBuilder(
+  drift.ColumnOrderings<String> get id => $composableBuilder(
     column: $table.id,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<int> get idx => $composableBuilder(
+  drift.ColumnOrderings<int> get idx => $composableBuilder(
     column: $table.idx,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get mimeType => $composableBuilder(
+  drift.ColumnOrderings<String> get mimeType => $composableBuilder(
     column: $table.mimeType,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get path => $composableBuilder(
+  drift.ColumnOrderings<String> get path => $composableBuilder(
     column: $table.path,
-    builder: (column) => ColumnOrderings(column),
+    builder: (column) => drift.ColumnOrderings(column),
   );
 
   $$AiRequestTableOrderingComposer get requestId {
@@ -1570,7 +1975,7 @@ class $$AiRequestImageTableOrderingComposer
 }
 
 class $$AiRequestImageTableAnnotationComposer
-    extends Composer<_$AppDb, $AiRequestImageTable> {
+    extends drift.Composer<_$AppDb, $AiRequestImageTable> {
   $$AiRequestImageTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -1578,16 +1983,16 @@ class $$AiRequestImageTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<String> get id =>
+  drift.GeneratedColumn<String> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  GeneratedColumn<int> get idx =>
+  drift.GeneratedColumn<int> get idx =>
       $composableBuilder(column: $table.idx, builder: (column) => column);
 
-  GeneratedColumn<String> get mimeType =>
+  drift.GeneratedColumn<String> get mimeType =>
       $composableBuilder(column: $table.mimeType, builder: (column) => column);
 
-  GeneratedColumn<String> get path =>
+  drift.GeneratedColumn<String> get path =>
       $composableBuilder(column: $table.path, builder: (column) => column);
 
   $$AiRequestTableAnnotationComposer get requestId {
@@ -1616,7 +2021,7 @@ class $$AiRequestImageTableAnnotationComposer
 
 class $$AiRequestImageTableTableManager
     extends
-        RootTableManager<
+        drift.RootTableManager<
           _$AppDb,
           $AiRequestImageTable,
           AiRequestImageData,
@@ -1627,11 +2032,11 @@ class $$AiRequestImageTableTableManager
           $$AiRequestImageTableUpdateCompanionBuilder,
           (AiRequestImageData, $$AiRequestImageTableReferences),
           AiRequestImageData,
-          PrefetchHooks Function({bool requestId})
+          drift.PrefetchHooks Function({bool requestId})
         > {
   $$AiRequestImageTableTableManager(_$AppDb db, $AiRequestImageTable table)
     : super(
-        TableManagerState(
+        drift.TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -1642,12 +2047,12 @@ class $$AiRequestImageTableTableManager
               $$AiRequestImageTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
-                Value<String> id = const Value.absent(),
-                Value<String> requestId = const Value.absent(),
-                Value<int> idx = const Value.absent(),
-                Value<String?> mimeType = const Value.absent(),
-                Value<String?> path = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
+                drift.Value<String> id = const drift.Value.absent(),
+                drift.Value<String> requestId = const drift.Value.absent(),
+                drift.Value<int> idx = const drift.Value.absent(),
+                drift.Value<String?> mimeType = const drift.Value.absent(),
+                drift.Value<String?> path = const drift.Value.absent(),
+                drift.Value<int> rowid = const drift.Value.absent(),
               }) => AiRequestImageCompanion(
                 id: id,
                 requestId: requestId,
@@ -1661,9 +2066,9 @@ class $$AiRequestImageTableTableManager
                 required String id,
                 required String requestId,
                 required int idx,
-                Value<String?> mimeType = const Value.absent(),
-                Value<String?> path = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
+                drift.Value<String?> mimeType = const drift.Value.absent(),
+                drift.Value<String?> path = const drift.Value.absent(),
+                drift.Value<int> rowid = const drift.Value.absent(),
               }) => AiRequestImageCompanion.insert(
                 id: id,
                 requestId: requestId,
@@ -1681,12 +2086,12 @@ class $$AiRequestImageTableTableManager
               )
               .toList(),
           prefetchHooksCallback: ({requestId = false}) {
-            return PrefetchHooks(
+            return drift.PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
               addJoins:
                   <
-                    T extends TableManagerState<
+                    T extends drift.TableManagerState<
                       dynamic,
                       dynamic,
                       dynamic,
@@ -1727,7 +2132,7 @@ class $$AiRequestImageTableTableManager
 }
 
 typedef $$AiRequestImageTableProcessedTableManager =
-    ProcessedTableManager<
+    drift.ProcessedTableManager<
       _$AppDb,
       $AiRequestImageTable,
       AiRequestImageData,
@@ -1738,7 +2143,213 @@ typedef $$AiRequestImageTableProcessedTableManager =
       $$AiRequestImageTableUpdateCompanionBuilder,
       (AiRequestImageData, $$AiRequestImageTableReferences),
       AiRequestImageData,
-      PrefetchHooks Function({bool requestId})
+      drift.PrefetchHooks Function({bool requestId})
+    >;
+typedef $$RecommendationTableCreateCompanionBuilder =
+    RecommendationCompanion Function({
+      required String id,
+      drift.Value<DateTime> createdAt,
+      required int rank,
+      required String title,
+      required String reason,
+      drift.Value<int> rowid,
+    });
+typedef $$RecommendationTableUpdateCompanionBuilder =
+    RecommendationCompanion Function({
+      drift.Value<String> id,
+      drift.Value<DateTime> createdAt,
+      drift.Value<int> rank,
+      drift.Value<String> title,
+      drift.Value<String> reason,
+      drift.Value<int> rowid,
+    });
+
+class $$RecommendationTableFilterComposer
+    extends drift.Composer<_$AppDb, $RecommendationTable> {
+  $$RecommendationTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  drift.ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => drift.ColumnFilters(column),
+  );
+
+  drift.ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => drift.ColumnFilters(column),
+  );
+
+  drift.ColumnFilters<int> get rank => $composableBuilder(
+    column: $table.rank,
+    builder: (column) => drift.ColumnFilters(column),
+  );
+
+  drift.ColumnFilters<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => drift.ColumnFilters(column),
+  );
+
+  drift.ColumnFilters<String> get reason => $composableBuilder(
+    column: $table.reason,
+    builder: (column) => drift.ColumnFilters(column),
+  );
+}
+
+class $$RecommendationTableOrderingComposer
+    extends drift.Composer<_$AppDb, $RecommendationTable> {
+  $$RecommendationTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  drift.ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => drift.ColumnOrderings(column),
+  );
+
+  drift.ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => drift.ColumnOrderings(column),
+  );
+
+  drift.ColumnOrderings<int> get rank => $composableBuilder(
+    column: $table.rank,
+    builder: (column) => drift.ColumnOrderings(column),
+  );
+
+  drift.ColumnOrderings<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => drift.ColumnOrderings(column),
+  );
+
+  drift.ColumnOrderings<String> get reason => $composableBuilder(
+    column: $table.reason,
+    builder: (column) => drift.ColumnOrderings(column),
+  );
+}
+
+class $$RecommendationTableAnnotationComposer
+    extends drift.Composer<_$AppDb, $RecommendationTable> {
+  $$RecommendationTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  drift.GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  drift.GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  drift.GeneratedColumn<int> get rank =>
+      $composableBuilder(column: $table.rank, builder: (column) => column);
+
+  drift.GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  drift.GeneratedColumn<String> get reason =>
+      $composableBuilder(column: $table.reason, builder: (column) => column);
+}
+
+class $$RecommendationTableTableManager
+    extends
+        drift.RootTableManager<
+          _$AppDb,
+          $RecommendationTable,
+          RecommendationData,
+          $$RecommendationTableFilterComposer,
+          $$RecommendationTableOrderingComposer,
+          $$RecommendationTableAnnotationComposer,
+          $$RecommendationTableCreateCompanionBuilder,
+          $$RecommendationTableUpdateCompanionBuilder,
+          (
+            RecommendationData,
+            drift.BaseReferences<
+              _$AppDb,
+              $RecommendationTable,
+              RecommendationData
+            >,
+          ),
+          RecommendationData,
+          drift.PrefetchHooks Function()
+        > {
+  $$RecommendationTableTableManager(_$AppDb db, $RecommendationTable table)
+    : super(
+        drift.TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RecommendationTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RecommendationTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RecommendationTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                drift.Value<String> id = const drift.Value.absent(),
+                drift.Value<DateTime> createdAt = const drift.Value.absent(),
+                drift.Value<int> rank = const drift.Value.absent(),
+                drift.Value<String> title = const drift.Value.absent(),
+                drift.Value<String> reason = const drift.Value.absent(),
+                drift.Value<int> rowid = const drift.Value.absent(),
+              }) => RecommendationCompanion(
+                id: id,
+                createdAt: createdAt,
+                rank: rank,
+                title: title,
+                reason: reason,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                drift.Value<DateTime> createdAt = const drift.Value.absent(),
+                required int rank,
+                required String title,
+                required String reason,
+                drift.Value<int> rowid = const drift.Value.absent(),
+              }) => RecommendationCompanion.insert(
+                id: id,
+                createdAt: createdAt,
+                rank: rank,
+                title: title,
+                reason: reason,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (e.readTable(table), drift.BaseReferences(db, table, e)),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$RecommendationTableProcessedTableManager =
+    drift.ProcessedTableManager<
+      _$AppDb,
+      $RecommendationTable,
+      RecommendationData,
+      $$RecommendationTableFilterComposer,
+      $$RecommendationTableOrderingComposer,
+      $$RecommendationTableAnnotationComposer,
+      $$RecommendationTableCreateCompanionBuilder,
+      $$RecommendationTableUpdateCompanionBuilder,
+      (
+        RecommendationData,
+        drift.BaseReferences<_$AppDb, $RecommendationTable, RecommendationData>,
+      ),
+      RecommendationData,
+      drift.PrefetchHooks Function()
     >;
 
 class $AppDbManager {
@@ -1748,4 +2359,6 @@ class $AppDbManager {
       $$AiRequestTableTableManager(_db, _db.aiRequest);
   $$AiRequestImageTableTableManager get aiRequestImage =>
       $$AiRequestImageTableTableManager(_db, _db.aiRequestImage);
+  $$RecommendationTableTableManager get recommendation =>
+      $$RecommendationTableTableManager(_db, _db.recommendation);
 }

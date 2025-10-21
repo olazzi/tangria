@@ -108,47 +108,43 @@ class _CollectionScreenState extends State<CollectionScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              'My Collection',
-              style: TextStyle(
-                fontFamily: 'Tektur',
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
-              ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(right: 4),
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 88, 79, 79),
-                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: _loadingRec
-                    ? null
-                    : () async {
-                        final items = await _f;
-                        await _openIdeasMenu(items);
-                      },
-                child: _loadingRec
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                      )
-                    : const Icon(Icons.auto_awesome, size: 22),
-              ),
-            ),
-          ],
+        title: const Text(
+          'My Collection',
+          style: TextStyle(
+            fontFamily: 'Tektur',
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 88, 79, 79),
+                foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: _loadingRec
+                  ? null
+                  : () async {
+                      final items = await _f;
+                      await _openIdeasMenu(items);
+                    },
+              child: _loadingRec
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                    )
+                  : const Icon(Icons.auto_awesome, size: 22),
+            ),
+          ),
+        ],
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
       ),

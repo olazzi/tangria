@@ -29,62 +29,83 @@ class CollectionList extends StatelessWidget {
         ),
       );
     }
-    return GridView.builder(
-      itemCount: items.length,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: 0.8,
-      ),
-      itemBuilder: (c, i) {
-        final it = items[i];
-        final price = _priceText(it);
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              it.imagePath.isEmpty
-                  ? Container(color: Theme.of(context).colorScheme.surfaceVariant)
-                  : Image.file(File(it.imagePath), fit: BoxFit.cover),
-              Positioned(
-                left: 8,
-                right: 8,
-                bottom: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.55),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        it.title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
-                      ),
-                      if (price.isNotEmpty) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          price,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              ),
-            ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final itemMinWidth = 140.0;
+        final cols = (constraints.maxWidth / itemMinWidth).floor().clamp(2, 5);
+        return GridView.builder(
+          itemCount: items.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: cols,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 0.78,
           ),
+          itemBuilder: (c, i) {
+            final it = items[i];
+            final price = _priceText(it);
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  if (it.imagePath.isEmpty)
+                    Container(color: Theme.of(context).colorScheme.surfaceVariant)
+                  else
+                    Image.file(
+                      File(it.imagePath),
+                      fit: BoxFit.cover,
+                      gaplessPlayback: true,
+                      errorBuilder: (_, __, ___) => Container(color: Theme.of(context).colorScheme.surfaceVariant),
+                    ),
+                  Positioned.fill(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.black.withOpacity(0.0),
+                            Colors.black.withOpacity(0.15),
+                            Colors.black.withOpacity(0.55),
+                          ],
+                          stops: const [0.4, 0.7, 1.0],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 8,
+                    right: 8,
+                    bottom: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.35),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.white.withOpacity(0.08)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            it.title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
+                          ),
+                          
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         );
       },
     );

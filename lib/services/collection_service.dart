@@ -97,10 +97,10 @@ class CollectionService {
   }
 
   static String formatTotalRange(List<CollectionItem> items) {
-    final minSum = items.fold<double>(0, (a, b) => a + (b.minPrice > 0 ? b.minPrice : b.price));
-    final maxSum = items.fold<double>(0, (a, b) => a + (b.maxPrice > 0 ? b.maxPrice : b.price));
-    if (minSum == 0 && maxSum == 0) return formatCurrency(0);
-    if ((minSum - maxSum).abs() < 0.01) return formatCurrency(minSum);
-    return '${formatCurrency(minSum)} – ${formatCurrency(maxSum)}';
+    final total = items.fold<double>(
+      0,
+      (a, b) => a + (b.maxPrice > 0 ? b.maxPrice : (b.price > 0 ? b.price : b.minPrice)),
+    );
+    return formatCurrency(total);
   }
 }

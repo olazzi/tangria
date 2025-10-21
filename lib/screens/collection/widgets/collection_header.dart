@@ -1,3 +1,4 @@
+// lib/screens/collection/widgets/collection_header.dart
 import 'package:flutter/material.dart';
 
 class CollectionHeader extends StatelessWidget {

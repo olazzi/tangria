@@ -1,9 +1,9 @@
 // lib/screens/home/widgets/selected_item_sheet.dart
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'frosted_action_bar.dart';
 
 const kActionBarHeight = 56.0;
-const _kButtonHeight = 48.0;
 
 class SelectedItemSheet extends StatelessWidget {
   final List<Uint8List> photos;
@@ -17,6 +17,8 @@ class SelectedItemSheet extends StatelessWidget {
   final VoidCallback onToggleCollapse;
   final void Function(int index)? onRemovePhoto;
   final ScrollController? scrollController;
+  final Map<String, dynamic>? result;
+  final bool lowConfidence;
 
   const SelectedItemSheet({
     super.key,
@@ -31,6 +33,8 @@ class SelectedItemSheet extends StatelessWidget {
     required this.onToggleCollapse,
     this.onRemovePhoto,
     this.scrollController,
+    this.result,
+    this.lowConfidence = false,
   });
 
   @override
@@ -82,31 +86,90 @@ class SelectedItemSheet extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (collapsed)
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding: EdgeInsets.fromLTRB(12, 6, 12, bottomBarPadding),
-                        child: _CollapsedBarContent(photos: photos, sending: sending),
-                      ),
-                    )
-                  else
-                    Expanded(
-                      child: _GridArea(
-                        photos: photos,
-                        sending: sending,
-                        scrollController: scrollController,
-                        onRemovePhoto: onRemovePhoto,
-                        bottomPad: bottomBarPadding,
-                      ),
+                  Expanded(
+                    child: CustomScrollView(
+                      controller: scrollController,
+                      slivers: [
+                        if (photos.isEmpty)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(12, 12, 12, result == null && !lowConfidence ? bottomBarPadding : 12),
+                              child: const _DropZone(),
+                            ),
+                          ),
+                        if (photos.isNotEmpty)
+                          SliverPadding(
+                            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                            sliver: SliverGrid(
+                              delegate: SliverChildBuilderDelegate(
+                                (c, i) => Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    ClipRRect(borderRadius: BorderRadius.circular(14), child: Image.memory(photos[i], fit: BoxFit.cover)),
+                                    if (onRemovePhoto != null && photos.length > 1)
+                                      Positioned(
+                                        top: 6,
+                                        right: 6,
+                                        child: Material(
+                                          color: Colors.black54,
+                                          shape: const CircleBorder(),
+                                          child: InkWell(
+                                            customBorder: const CircleBorder(),
+                                            onTap: () => onRemovePhoto!(i),
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(6),
+                                              child: Icon(Icons.close_rounded, size: 18, color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                childCount: photos.length,
+                              ),
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: 1,
+                              ),
+                            ),
+                          ),
+                        if (sending)
+                          const SliverToBoxAdapter(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(12, 0, 12, 12),
+                              child: _EstimatingStripe(),
+                            ),
+                          ),
+                        if (result != null)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                              child: _ResultCard(data: result!),
+                            ),
+                          ),
+                        if (lowConfidence)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(12, 0, 12, bottomBarPadding),
+                              child: _LowConfidenceBanner(onAddMore: onGallery),
+                            ),
+                          )
+                        else
+                          SliverToBoxAdapter(child: SizedBox(height: bottomBarPadding)),
+                      ],
                     ),
+                  ),
                 ],
               ),
               Positioned(
                 left: 0,
                 right: 0,
                 bottom: 0,
-                child: _FrostedActionBar(
+                child: FrostedActionBar(
                   sending: sending,
+                  canEstimate: photos.isNotEmpty,
                   onCamera: onCamera,
                   onGallery: onGallery,
                   onEstimate: onEstimate,
@@ -121,257 +184,118 @@ class SelectedItemSheet extends StatelessWidget {
   }
 }
 
-class _CollapsedBarContent extends StatelessWidget {
-  final List<Uint8List> photos;
-  final bool sending;
-  const _CollapsedBarContent({required this.photos, required this.sending});
+class _DropZone extends StatelessWidget {
+  const _DropZone();
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (photos.isNotEmpty)
-          SizedBox(
-            height: 76,
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-              scrollDirection: Axis.horizontal,
-              itemCount: photos.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
-              itemBuilder: (_, i) => ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.memory(photos[i], fit: BoxFit.cover),
-                ),
-              ),
+    return Container(
+      height: 220,
+      decoration: BoxDecoration(
+        color: cs.surfaceVariant.withOpacity(0.35),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: cs.outlineVariant, width: 1),
+      ),
+      child: Container(
+        margin: const EdgeInsets.all(1),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+        child: CustomPaint(
+          painter: _DashPainter(color: cs.outlineVariant),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.cloud_upload_outlined, color: cs.onSurfaceVariant),
+                const SizedBox(height: 8),
+                Text('Add photos', style: TextStyle(color: cs.onSurfaceVariant, fontWeight: FontWeight.w600)),
+              ],
             ),
-          )
-        else
-          Container(
-            height: 76,
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-              color: cs.surfaceVariant.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: cs.outlineVariant),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text('No photos yet', style: TextStyle(color: cs.onSurfaceVariant)),
           ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Icon(sending ? Icons.sync : Icons.price_change, size: 18, color: cs.onSurfaceVariant),
-            const SizedBox(width: 8),
-            Text(
-              sending ? 'Estimating…' : 'Ready to estimate',
-              style: TextStyle(color: cs.onSurfaceVariant, fontWeight: FontWeight.w600),
-            ),
-          ],
         ),
-      ],
+      ),
     );
   }
 }
 
-class _GridArea extends StatelessWidget {
-  final List<Uint8List> photos;
-  final bool sending;
-  final ScrollController? scrollController;
-  final void Function(int index)? onRemovePhoto;
-  final double bottomPad;
-
-  const _GridArea({
-    required this.photos,
-    required this.sending,
-    required this.scrollController,
-    required this.onRemovePhoto,
-    required this.bottomPad,
-  });
+class _DashPainter extends CustomPainter {
+  final Color color;
+  const _DashPainter({required this.color});
 
   @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    return CustomScrollView(
-      controller: scrollController,
-      slivers: [
-        if (photos.isEmpty)
-          SliverToBoxAdapter(
-            child: Container(
-              height: 220,
-              alignment: Alignment.center,
-              margin: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-              decoration: BoxDecoration(
-                color: cs.surfaceVariant.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: cs.outlineVariant),
-              ),
-              child: Text('Add some photos', style: TextStyle(color: cs.onSurfaceVariant, fontSize: 16, fontWeight: FontWeight.w600)),
-            ),
-          ),
-        if (photos.isNotEmpty)
-          SliverPadding(
-            padding: EdgeInsets.fromLTRB(12, 12, 12, bottomPad),
-            sliver: SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                (c, i) => Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(14),
-                      child: Image.memory(photos[i], fit: BoxFit.cover),
-                    ),
-                    if (onRemovePhoto != null && photos.length > 1)
-                      Positioned(
-                        top: 6,
-                        right: 6,
-                        child: Material(
-                          color: Colors.black54,
-                          shape: const CircleBorder(),
-                          child: InkWell(
-                            customBorder: const CircleBorder(),
-                            onTap: () => onRemovePhoto!(i),
-                            child: const Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Icon(Icons.close_rounded, size: 18, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                childCount: photos.length,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1,
-              ),
-            ),
-          ),
-        if (sending)
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(12, 0, 12, 12),
-              child: _EstimatingStripe(),
-            ),
-          ),
-      ],
-    );
+  void paint(Canvas canvas, Size size) {
+    const dashWidth = 8.0;
+    const dashSpace = 6.0;
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 1.2
+      ..style = PaintingStyle.stroke;
+    final r = RRect.fromRectAndRadius(Offset.zero & size, const Radius.circular(15));
+    final path = Path()..addRRect(r);
+    final metrics = path.computeMetrics();
+    for (final metric in metrics) {
+      double distance = 0.0;
+      while (distance < metric.length) {
+        final next = distance + dashWidth;
+        final extract = metric.extractPath(distance, next);
+        canvas.drawPath(extract, paint);
+        distance = next + dashSpace;
+      }
+    }
   }
+
+  @override
+  bool shouldRepaint(covariant _DashPainter oldDelegate) => oldDelegate.color != color;
 }
 
-class _FrostedActionBar extends StatelessWidget {
-  final bool sending;
-  final VoidCallback onCamera;
-  final VoidCallback onGallery;
-  final VoidCallback onEstimate;
-  final VoidCallback onClear;
-
-  const _FrostedActionBar({
-    required this.sending,
-    required this.onCamera,
-    required this.onGallery,
-    required this.onEstimate,
-    required this.onClear,
-  });
+class _ResultCard extends StatelessWidget {
+  final Map<String, dynamic> data;
+  const _ResultCard({required this.data});
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return Material(
-      color: cs.surface,
-      child: SafeArea(
-        top: false,
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-          decoration: BoxDecoration(
-            color: cs.surface,
-            border: Border(top: BorderSide(color: cs.outlineVariant)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.06),
-                blurRadius: 12,
-                offset: const Offset(0, -4),
-              ),
+    final p = (data['primary'] ?? {}) as Map<String, dynamic>;
+    final parts = [
+      (p['brand'] ?? '').toString(),
+      (p['model'] ?? '').toString(),
+      (p['reference'] ?? '').toString()
+    ].where((e) => e.isNotEmpty).toList();
+    final title = parts.isEmpty ? 'Unknown' : parts.join(' ');
+    final conf = ((p['confidence'] ?? 0.0) as num).toDouble().clamp(0.0, 1.0);
+    final est = (data['estimate'] ?? {}) as Map<String, dynamic>;
+    final low = est['price_low'];
+    final high = est['price_high'];
+    final priceText = (low != null && high != null)
+        ? '\$${low.toString()}–\$${high.toString()}'
+        : (est['price'] != null ? '\$${est['price']}' : '—');
+
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+      decoration: BoxDecoration(
+        color: cs.surfaceVariant.withOpacity(0.45),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: cs.outlineVariant),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Expanded(child: LinearProgressIndicator(value: conf, minHeight: 8)),
+              const SizedBox(width: 10),
+              Text('${(conf * 100).round()}%', style: TextStyle(color: cs.onSurfaceVariant)),
             ],
           ),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final narrow = constraints.maxWidth < 420;
-              if (!narrow) {
-                return Row(
-                  children: [
-                    Expanded(child: _SolidButton(icon: Icons.photo_camera_outlined, label: 'Camera', onTap: sending ? null : onCamera, busy: false)),
-                    const SizedBox(width: 8),
-                    Expanded(child: _OutlineButton(icon: Icons.photo_library_outlined, label: 'Gallery', onTap: sending ? null : onGallery)),
-                    const SizedBox(width: 8),
-                    Expanded(child: _SolidButton(icon: Icons.price_change, label: sending ? 'Estimating' : 'Estimate', onTap: sending ? null : onEstimate, busy: sending)),
-                    const SizedBox(width: 8),
-                    SizedBox(width: 120, child: _OutlineButton(icon: Icons.delete_sweep_outlined, label: 'Clear', onTap: sending ? null : onClear)),
-                  ],
-                );
-              }
-              final w = (constraints.maxWidth - 8) / 2;
-              return Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  SizedBox(width: w, child: _SolidButton(icon: Icons.photo_camera_outlined, label: 'Camera', onTap: sending ? null : onCamera, busy: false)),
-                  SizedBox(width: w, child: _OutlineButton(icon: Icons.photo_library_outlined, label: 'Gallery', onTap: sending ? null : onGallery)),
-                  SizedBox(width: w, child: _SolidButton(icon: Icons.price_change, label: sending ? 'Estimating' : 'Estimate', onTap: sending ? null : onEstimate, busy: sending)),
-                  SizedBox(width: w, child: _OutlineButton(icon: Icons.delete_sweep_outlined, label: 'Clear', onTap: sending ? null : onClear)),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SolidButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback? onTap;
-  final bool busy;
-
-  const _SolidButton({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-    required this.busy,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        elevation: 0,
-        backgroundColor: cs.primary,
-        foregroundColor: cs.onPrimary,
-        minimumSize: const Size.fromHeight(_kButtonHeight),
-        maximumSize: const Size(double.infinity, _kButtonHeight),
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (busy)
-            const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-          else
-            Icon(icon, size: 20),
-          const SizedBox(width: 8),
-          Flexible(
-            child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, softWrap: false, style: const TextStyle(fontWeight: FontWeight.w600)),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Icon(Icons.attach_money, size: 18, color: cs.onSurfaceVariant),
+              const SizedBox(width: 6),
+              Text(priceText, style: const TextStyle(fontWeight: FontWeight.w600)),
+            ],
           ),
         ],
       ),
@@ -379,38 +303,27 @@ class _SolidButton extends StatelessWidget {
   }
 }
 
-class _OutlineButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback? onTap;
-
-  const _OutlineButton({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
+class _LowConfidenceBanner extends StatelessWidget {
+  final VoidCallback onAddMore;
+  const _LowConfidenceBanner({required this.onAddMore});
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return OutlinedButton(
-      onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-        foregroundColor: cs.onSurface,
-        side: BorderSide(color: cs.outlineVariant),
-        minimumSize: const Size.fromHeight(_kButtonHeight),
-        maximumSize: const Size(double.infinity, _kButtonHeight),
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+      decoration: BoxDecoration(
+        color: cs.surfaceVariant.withOpacity(0.45),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: cs.outlineVariant),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 20),
-          const SizedBox(width: 8),
-          Flexible(
-            child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, softWrap: false, style: const TextStyle(fontWeight: FontWeight.w600)),
-          ),
+          Icon(Icons.help_outline, color: cs.onSurfaceVariant),
+          const SizedBox(width: 10),
+          const Expanded(child: Text('Unsure result — add another angle?')),
+          const SizedBox(width: 10),
+          OutlinedButton(onPressed: onAddMore, child: const Text('Add more photos')),
         ],
       ),
     );

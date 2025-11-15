@@ -1,4 +1,4 @@
-import 'dart:convert';
+ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:uuid/uuid.dart';
 import '../local/db.dart';
@@ -22,6 +22,7 @@ class AiLogsRepository {
   }) async {
     final db = await AppDb.instance();
     final id = _uuid.v4();
+
     await db.transaction(() async {
       await db.insertRequest(
         id: id,
@@ -34,24 +35,31 @@ class AiLogsRepository {
         responseText: responseText,
         responseJson: responseJson == null ? null : jsonEncode(responseJson),
       );
+
       if (images != null && images.isNotEmpty) {
-        final ts = DateTime.now().toIso8601String().replaceAll(':', '-');
         final items = <AiRequestImageCompanion>[];
+        final mimes = imageMimeTypes ?? const <String>[];
+        final ts = DateTime.now().millisecondsSinceEpoch;
+
         for (var i = 0; i < images.length; i++) {
-          final ext = (imageMimeTypes != null && i < imageMimeTypes.length && imageMimeTypes[i].contains('png')) ? 'png' : 'jpg';
+          final mime = (i < mimes.length ? mimes[i] : 'image/jpeg').toLowerCase();
+          final ext = mime.contains('png') ? 'png' : 'jpg';
           final name = '$ts-$id-$i';
-          final path = await LocalStorage.saveBytes(images[i], basename: name, ext: ext);
+          final savedPath = await LocalStorage.saveBytes(images[i], basename: name, ext: ext);
+
           items.add(AiRequestImageCompanion.insert(
             id: _uuid.v4(),
             requestId: id,
             idx: i,
-            mimeType: Value(imageMimeTypes != null && i < imageMimeTypes.length ? imageMimeTypes[i] : null),
-            path: Value(path),
+            mimeType: Value(mime),
+            path: Value(savedPath),
           ));
         }
+
         await db.insertImages(id, items);
       }
     });
+
     return id;
   }
 
@@ -67,6 +75,6 @@ class AiLogsRepository {
 
   Future<void> delete(String id) async {
     final db = await AppDb.instance();
-    await db.deleteRequest(id);
+    await db.deleteRequestCascade(id);
   }
 }

@@ -4,7 +4,12 @@ class WatchSearchBar extends StatefulWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onSubmit;
-  const WatchSearchBar({super.key, this.controller, this.onChanged, this.onSubmit});
+  const WatchSearchBar({
+    super.key,
+    this.controller,
+    this.onChanged,
+    this.onSubmit,
+  });
 
   @override
   State<WatchSearchBar> createState() => _WatchSearchBarState();
@@ -41,7 +46,6 @@ class _WatchSearchBarState extends State<WatchSearchBar> {
       decoration: BoxDecoration(
         color: cs.surfaceContainerHighest,
         border: Border.all(color: cs.outlineVariant),
-        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
@@ -56,6 +60,7 @@ class _WatchSearchBarState extends State<WatchSearchBar> {
               textInputAction: TextInputAction.search,
               decoration: const InputDecoration(
                 hintText: 'Brand, model, complication, keywords',
+                hintStyle: TextStyle(fontSize: 18),
                 isCollapsed: true,
                 border: InputBorder.none,
               ),

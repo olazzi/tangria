@@ -1,4 +1,3 @@
-// lib/local/db.dart
 import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/drift.dart' as drift;
@@ -25,8 +24,7 @@ class AiRequest extends Table {
 
 class AiRequestImage extends Table {
   TextColumn get id => text()();
-  TextColumn get requestId =>
-      text().references(AiRequest, #id, onDelete: KeyAction.cascade)();
+  TextColumn get requestId => text().references(AiRequest, #id, onDelete: KeyAction.cascade)();
   IntColumn get idx => integer()();
   TextColumn get mimeType => text().nullable()();
   TextColumn get path => text().nullable()();
@@ -47,17 +45,23 @@ class Recommendation extends Table {
 @DriftDatabase(tables: [AiRequest, AiRequestImage, Recommendation])
 class AppDb extends _$AppDb {
   AppDb._(super.e);
-  static AppDb? _instance;
+  static Future<AppDb>? _future;
 
-  static Future<AppDb> instance() async {
-    if (_instance != null) return _instance!;
+  static Future<AppDb> instance() {
+    if (_future != null) return _future!;
+    _future = _open();
+    return _future!;
+  }
+
+  static Future<AppDb> _open() async {
     final dir = await getApplicationSupportDirectory();
     final dbDir = Directory(p.join(dir.path, 'app_data', 'database'));
     await dbDir.create(recursive: true);
     final file = File(p.join(dbDir.path, 'tangria.db'));
-    final db = NativeDatabase.createInBackground(file);
-    _instance = AppDb._(db);
-    return _instance!;
+    final executor = NativeDatabase.createInBackground(file);
+    final db = AppDb._(executor);
+    await db.customStatement('PRAGMA journal_mode=WAL;');
+    return db;
   }
 
   @override
@@ -65,15 +69,15 @@ class AppDb extends _$AppDb {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        onCreate: (m) async {
-          await m.createAll();
-        },
-        onUpgrade: (m, from, to) async {
-          if (from < 2) {
-            await m.createTable(recommendation);
-          }
-        },
-      );
+    onCreate: (m) async {
+      await m.createAll();
+    },
+    onUpgrade: (m, from, to) async {
+      if (from < 2) {
+        await m.createTable(recommendation);
+      }
+    },
+  );
 
   Future<String> insertRequest({
     required String id,
@@ -92,33 +96,24 @@ class AppDb extends _$AppDb {
       temperature: temperature,
       statusCode: statusCode,
       latencyMs: latencyMs,
-      prompt: Value(prompt),
-      errorText: Value(errorText),
-      responseText: Value(responseText),
-      responseJson: Value(responseJson),
+      prompt: drift.Value(prompt),
+      errorText: drift.Value(errorText),
+      responseText: drift.Value(responseText),
+      responseJson: drift.Value(responseJson),
     ));
     return id;
   }
 
-  Future<void> insertImages(
-    String requestId,
-    List<AiRequestImageCompanion> items,
-  ) async {
+  Future<void> insertImages(String requestId, List<AiRequestImageCompanion> items) async {
     await batch((b) => b.insertAll(aiRequestImage, items));
   }
 
   Future<List<AiRequestData>> listRequests({int limit = 50}) {
-    return (select(aiRequest)
-          ..orderBy([(t) => OrderingTerm.desc(t.createdAt)])
-          ..limit(limit))
-        .get();
+    return (select(aiRequest)..orderBy([(t) => OrderingTerm.desc(t.createdAt)])..limit(limit)).get();
   }
 
   Future<List<AiRequestImageData>> imagesOf(String requestId) {
-    return (select(aiRequestImage)
-          ..where((t) => t.requestId.equals(requestId))
-          ..orderBy([(t) => OrderingTerm.asc(t.idx)]))
-        .get();
+    return (select(aiRequestImage)..where((t) => t.requestId.equals(requestId))..orderBy([(t) => OrderingTerm.asc(t.idx)])).get();
   }
 
   Future<void> updateRequestResponseJson(String id, String responseJson) async {
@@ -127,42 +122,34 @@ class AppDb extends _$AppDb {
     );
   }
 
-  Future<void> replaceRecommendationsRaw(
-    List<Map<String, String>> items,
-  ) async {
+  Future<void> replaceRecommendationsRaw(List<Map<String, String>> items) async {
     await transaction(() async {
       await delete(recommendation).go();
       int i = 0;
       final now = DateTime.now().millisecondsSinceEpoch;
       await batch((b) => b.insertAll(
-            recommendation,
-            items.map((r) {
-              final rank = i;
-              final rid = '$now-$i';
-              i++;
-              return RecommendationCompanion.insert(
-                id: rid,
-                rank: rank,
-                title: r['title'] ?? '',
-                reason: r['reason'] ?? '',
-              );
-            }).toList(),
-          ));
+        recommendation,
+        items.map((r) {
+          final rank = i;
+          final rid = '$now-$i';
+          i++;
+          return RecommendationCompanion.insert(
+            id: rid,
+            rank: rank,
+            title: r['title'] ?? '',
+            reason: r['reason'] ?? '',
+          );
+        }).toList(),
+      ));
     });
   }
 
   Future<List<RecommendationData>> latestRecommendations({int limit = 10}) {
-    return (select(recommendation)
-          ..orderBy([(t) => OrderingTerm.asc(t.rank)])
-          ..limit(limit))
-        .get();
+    return (select(recommendation)..orderBy([(t) => OrderingTerm.asc(t.rank)])..limit(limit)).get();
   }
 
-  // --- DELETE HELPERS ---
-
   Future<void> deleteImagesOf(String requestId) async {
-    await (delete(aiRequestImage)..where((t) => t.requestId.equals(requestId)))
-        .go();
+    await (delete(aiRequestImage)..where((t) => t.requestId.equals(requestId))).go();
   }
 
   Future<void> deleteRequest(String id) async {
@@ -170,7 +157,6 @@ class AppDb extends _$AppDb {
   }
 
   Future<void> deleteRequestCascade(String id) async {
-    // Explicitly delete images first (defensive), then the request.
     await transaction(() async {
       await deleteImagesOf(id);
       await deleteRequest(id);

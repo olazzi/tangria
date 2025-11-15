@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'router.dart';
+import '../app/route_observer.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -7,9 +8,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tangria',
-      theme: ThemeData(useMaterial3: true, colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
       routes: routes,
       initialRoute: '/',
+      navigatorObservers: [routeObserver],
     );
   }
 }

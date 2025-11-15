@@ -27,7 +27,10 @@ class HistoryTile extends StatelessWidget {
       base = base.substring(brand.length).trim();
     }
     if (base.isEmpty) base = desc.trim();
-    final rxType = RegExp(r"\b(watch|wristwatch|men'?s|women'?s|ladies|gents|gent'?s|unisex)\b", caseSensitive: false);
+    final rxType = RegExp(
+      r"\b(watch|wristwatch|men'?s|women'?s|ladies|gents|gent'?s|unisex)\b",
+      caseSensitive: false,
+    );
     base = base.replaceAll(rxType, '');
     base = base.replaceAll(RegExp(r'\s+'), ' ').trim();
     return base;
@@ -49,10 +52,17 @@ class HistoryTile extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            item.imagePath.isEmpty
-                ? Container(color: Theme.of(context).colorScheme.surfaceVariant)
-                : Image.file(File(item.imagePath), fit: BoxFit.cover),
-
+            if (item.imagePath.isEmpty)
+              Container(color: Theme.of(context).colorScheme.surfaceVariant)
+            else
+              Image.file(
+                File(item.imagePath),
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.low,
+                errorBuilder: (_, __, ___) => Container(
+                  color: Theme.of(context).colorScheme.surfaceVariant,
+                ),
+              ),
             Positioned.fill(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -68,25 +78,6 @@ class HistoryTile extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Sağ üst: sil butonu
-            Positioned(
-              top: 10,
-              right: 10,
-              child: Material(
-                color: Colors.black54,
-                shape: const CircleBorder(),
-                child: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: onDelete,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Icon(Icons.delete_outline, size: 20, color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-
             Positioned(
               left: 16,
               right: 16,
@@ -132,7 +123,10 @@ class HistoryTile extends StatelessWidget {
                   const SizedBox(width: 10),
                   if (item.price.isNotEmpty)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.55),
                         borderRadius: BorderRadius.circular(8),
